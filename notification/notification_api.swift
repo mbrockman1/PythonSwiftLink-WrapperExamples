@@ -15,8 +15,6 @@ extension NotificationApi: NotificationApi_Delegate {
         timing: Int,
         notification_id: String,
         should_repeat: Bool) {
-            print(title)
-            
             self.requestAuthorization { granted in
                 if granted {
                     print("Success")
@@ -25,37 +23,33 @@ extension NotificationApi: NotificationApi_Delegate {
                     print("Failed")
                 }
             }
-            // 2
             let content = UNMutableNotificationContent()
             content.title = title
             content.body = message
 
-            // 3
             var trigger: UNNotificationTrigger?
             trigger = UNTimeIntervalNotificationTrigger(
                 timeInterval: TimeInterval(timing),
                 repeats: should_repeat)
 
-            // 4
             if let trigger = trigger {
               let request = UNNotificationRequest(
                 identifier: notification_id,
                 content: content,
                 trigger: trigger)
               // 5
-              print("got to step 5")
               UNUserNotificationCenter.current().add(request) { error in
                 if let error = error {
                   print(error)
-                  print("failure")
                 }
               }
-              print("complete")
             }
-            
-            
-            
     }
+    
+    func remove_notifications_func(notification_id: String){
+        UNUserNotificationCenter.current()
+          .removePendingNotificationRequests(withIdentifiers: [notification_id])
+      }
     
     func requestAuthorization(completion: @escaping  (Bool) -> Void) {
       UNUserNotificationCenter.current()

@@ -41,8 +41,8 @@ class NotificationWidget(BoxLayout):
         }
 
 
-    def remove_notifications(self):
-        self.apple_api.remove_notifications(self.notification_id)
+    def remove_notifications_func(self, instance):
+        self.apple_api.remove_notifications_func(self.notification_id)
 
     def do_notify(self, instance):
         self.notification_dict={
@@ -74,7 +74,7 @@ class NotificationWidget(BoxLayout):
             text='Remove Notification',
             size_hint=(1, None),
         )
-        self.remove_notifications.bind(on_press=self.remove_notifications)
+        self.remove_notifications.bind(on_press=self.remove_notifications_func)
         self.add_widget(self.simple_notification)
         self.add_widget(self.remove_notifications)
 

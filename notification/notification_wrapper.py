@@ -12,7 +12,7 @@ class NotificationApi:
         notification_id: str,
         should_repeat: bool): ...
 
-    def remove_notifications(
+    def remove_notifications_func(
         self,
         notification_id: str
     ): ...
